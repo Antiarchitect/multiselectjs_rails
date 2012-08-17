@@ -47,6 +47,7 @@ $.widget("ui.multiselect", {
 		},
 		includeRemoveAll: true,
 		includeAddAll: true,
+        displayItemsCount: true,
 		pressEnterKeyToAddAll: false
 	},
 	_create: function() {
@@ -54,6 +55,20 @@ $.widget("ui.multiselect", {
 		this.id = this.element.attr("id");
 		this.container = $('<div class="ui-multiselect ui-helper-clearfix ui-widget"></div>').insertAfter(this.element);
 		this.count = 0; // number of currently selected options
+
+        this.labelAddAll = this.element.data("locale").add_all;
+        if (!(this.labelAddAll)) {
+            this.labelAddAll = $.ui.multiselect.locale.addAll;
+        }
+        this.labelRemoveAll = this.element.data("locale").remove_all;
+        if (!(this.labelRemoveAll)) {
+            this.labelRemoveAll = $.ui.multiselect.locale.removeAll;
+        }
+        this.labelItemsCount = this.element.data("locale").items_count;
+        if (!(this.labelItemsCount)) {
+            this.labelItemsCount = $.ui.multiselect.locale.itemsCount;
+        }
+
 		this.selectedContainer = $('<div class="selected"></div>');
 		if (this.options.selectedContainerOnLeft) {
 			this.selectedContainer.appendTo(this.container);
@@ -66,8 +81,12 @@ $.widget("ui.multiselect", {
 			this.selectedContainer.appendTo(this.container);
 			this.selectedContainer.addClass('right-column');
 		}
-		this.selectedActions = $('<div class="actions ui-widget-header ui-helper-clearfix"><span class="count">0 '+$.ui.multiselect.locale.itemsCount+'</span>'+(this.options.includeRemoveAll?'<a href="#" class="remove-all">'+$.ui.multiselect.locale.removeAll+'</a>':'<span class="remove-all">&nbsp;</span>')+'</div>').appendTo(this.selectedContainer);
-		this.availableActions = $('<div class="actions ui-widget-header ui-helper-clearfix"><input type="text" class="search empty ui-widget-content ui-corner-all"/>'+(this.options.includeAddAll?'<a href="#" class="add-all">'+$.ui.multiselect.locale.addAll+'</a>':'<span class="add-all">&nbsp;</span>')+'</div>').appendTo(this.availableContainer);
+        this.itemsCountSpan = '';
+        if (this.options.displayItemsCount) {
+            this.itemsCountSpan = '<span class="count">0 '+this.labelItemsCount+'</span>';
+        }
+		this.selectedActions = $('<div class="actions ui-widget-header ui-helper-clearfix">'+this.itemsCountSpan+(this.options.includeRemoveAll?'<a href="#" class="remove-all">'+this.labelRemoveAll+'</a>':'<span class="remove-all">&nbsp;</span>')+'</div>').appendTo(this.selectedContainer);
+		this.availableActions = $('<div class="actions ui-widget-header ui-helper-clearfix"><input type="text" class="search empty ui-widget-content ui-corner-all"/>'+(this.options.includeAddAll?'<a href="#" class="add-all">'+this.labelAddAll+'</a>':'<span class="add-all">&nbsp;</span>')+'</div>').appendTo(this.availableContainer);
 		this.selectedList = $('<ul class="selected connected-list"><li class="ui-helper-hidden-accessible"></li></ul>').bind('selectstart', function(){return false;}).appendTo(this.selectedContainer);
 		this.availableList = $('<ul class="available connected-list"><li class="ui-helper-hidden-accessible"></li></ul>').bind('selectstart', function(){return false;}).appendTo(this.availableContainer);
 
@@ -259,7 +278,7 @@ $.widget("ui.multiselect", {
 		return groupNode[0];
 	},
 	_updateCount: function() {
-		this.selectedContainer.find('span.count').text(this.count+" "+$.ui.multiselect.locale.itemsCount);
+		this.selectedContainer.find('span.count').text(this.count+" "+this.labelItemsCount);
 	},
 	_getOptionNode: function(option) {
 		option = $(option);
