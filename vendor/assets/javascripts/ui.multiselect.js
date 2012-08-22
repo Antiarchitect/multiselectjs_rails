@@ -68,11 +68,22 @@ $.widget("ui.multiselect", {
         if (!(this.labelItemsCount)) {
             this.labelItemsCount = $.ui.multiselect.locale.itemsCount;
         }
-
-		this.selectedContainer = $('<div class="selected"></div>');
+        this.labelSearch = this.element.data("locale").search;
+        if (!(this.labelSearch)) {
+          this.labelSearch = 'Search';
+        }
+        this.labelSelectedListTitle = this.element.data("locale").selected_list_title;
+        if (!(this.labelSelectedListTitle)) {
+          this.labelSelectedListTitle = '';
+        }
+        this.labelAvailableListTitle = this.element.data("locale").available_list_title;
+        if (!(this.labelAvailableListTitle)) {
+          this.labelAvailableListTitle = '';
+        }
+		this.selectedContainer = $('<div class="selected"><h4>' + this.labelSelectedListTitle + '</h4></div>');
 		if (this.options.selectedContainerOnLeft) {
 			this.selectedContainer.appendTo(this.container);
-			this.availableContainer = $('<div class="available"></div>').appendTo(this.container);
+			this.availableContainer = $('<div class="available"><h4>' + this.labelAvailableListTitle + '</h4></div>').appendTo(this.container);
 			this.availableContainer.addClass('right-column');
 		}
 		else
@@ -86,7 +97,7 @@ $.widget("ui.multiselect", {
             this.itemsCountSpan = '<span class="count">0 '+this.labelItemsCount+'</span>';
         }
 		this.selectedActions = $('<div class="actions ui-widget-header ui-helper-clearfix">'+this.itemsCountSpan+(this.options.includeRemoveAll?'<a href="#" class="remove-all">'+this.labelRemoveAll+'</a>':'<span class="remove-all">&nbsp;</span>')+'</div>').appendTo(this.selectedContainer);
-		this.availableActions = $('<div class="actions ui-widget-header ui-helper-clearfix"><input type="text" class="search empty ui-widget-content ui-corner-all"/>'+(this.options.includeAddAll?'<a href="#" class="add-all">'+this.labelAddAll+'</a>':'<span class="add-all">&nbsp;</span>')+'</div>').appendTo(this.availableContainer);
+		this.availableActions = $('<div class="actions ui-widget-header ui-helper-clearfix"><input type="text" placeholder="' + this.labelSearch + '" class="search empty ui-widget-content ui-corner-all"/>'+(this.options.includeAddAll?'<a href="#" class="add-all">'+this.labelAddAll+'</a>':'<span class="add-all">&nbsp;</span>')+'</div>').appendTo(this.availableContainer);
 		this.selectedList = $('<ul class="selected connected-list"><li class="ui-helper-hidden-accessible"></li></ul>').bind('selectstart', function(){return false;}).appendTo(this.selectedContainer);
 		this.availableList = $('<ul class="available connected-list"><li class="ui-helper-hidden-accessible"></li></ul>').bind('selectstart', function(){return false;}).appendTo(this.availableContainer);
 
