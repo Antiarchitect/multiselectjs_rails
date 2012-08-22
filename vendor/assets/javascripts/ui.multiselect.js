@@ -104,8 +104,8 @@ $.widget("ui.multiselect", {
 		// set dimensions
 		this.container.width(width-2);
 		if (this.options.selectedContainerOnLeft) {
-			this.selectedContainer.width(Math.floor(width*this.options.dividerLocation)-1);
-			this.availableContainer.width(Math.floor(width*(1-this.options.dividerLocation))-2);
+			this.selectedContainer.width(Math.floor(width*this.options.dividerLocation)-11);
+			this.availableContainer.width(Math.floor(width*(1-this.options.dividerLocation))-12);
 		}
 		else
 		{
