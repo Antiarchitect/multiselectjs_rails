@@ -4,8 +4,10 @@
 .ui-multiselect { border: solid 1px; font-size: 0.8em; }
 .ui-multiselect ul { -moz-user-select: none; }
 .ui-multiselect li { margin: 0; padding: 0; cursor: default; line-height: 20px; height: 20px; font-size: 11px; list-style: none; padding-right: 18px; overflow: hidden; word-wrap: break-word; }
-.ui-multiselect li a { color: #0088CC; padding: 0; display: block; float: left; cursor: pointer;}
-.ui-multiselect .ui-widget-header a { color: #0088CC; }
+.ui-multiselect li a { color: #0088CC; padding: 0; display: block; float: left; cursor: pointer; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.ui-multiselect .ui-widget-header { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.ui-multiselect .ui-widget-header a { color: #0088CC; background: #DDD; }
+.ui-multiselect .ui-widget-header.actions { background: #DDD; }
 .ui-multiselect .ui-widget-header a:visited { color: #0088CC; }
 .ui-multiselect .ui-widget-header a:hover { color: #005580; text-decoration: underline; }
 .ui-multiselect li a:visited { color: #0088CC; }
