@@ -294,7 +294,7 @@ $.widget("ui.multiselect", {
 	_getOptionNode: function(option) {
 		option = $(option);
         console.log(option)
-		var node = $('<li class="ui-state-default ui-element" title="'+option.text()+'"><span class="ui-icon"/><a href="' + option.data("url") + '">'+option.text()+'</a><a href="#" class="action"><span class="ui-corner-all ui-icon"/></a></li>').hide();
+		var node = $('<li class="ui-state-default ui-element" title="'+option.text()+'"><span class="ui-icon"/><a target="_blank" href="' + option.data("url") + '">'+option.text()+'</a><a href="#" class="action"><span class="ui-corner-all ui-icon"/></a></li>').hide();
 		node.data('optionLink', option);
 		return node;
 	},

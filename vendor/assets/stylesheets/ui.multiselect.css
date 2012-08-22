@@ -10,6 +10,8 @@
 .ui-multiselect .ui-widget-header a:hover { color: #005580; text-decoration: underline; }
 .ui-multiselect li a:visited { color: #0088CC; }
 .ui-multiselect li a:hover { color: #005580; text-decoration: underline; }
+.ui-multiselect li.ui-state-default { background: #EEEEEE; height: 30px; line-height: 30px; font-size: 12px;}
+.ui-multiselect li.ui-state-default .ui-icon { margin-top: 5px; }
 .ui-multiselect li.ui-state-default a:visited { color: #0088CC; }
 .ui-multiselect li.ui-state-default a:hover { color: #005580; text-decoration: underline; }
 .ui-multiselect li.ui-state-default a { color: #0088CC; }
